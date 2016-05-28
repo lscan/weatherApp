@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Open Weather app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+
+	<div class="container-fluid">
+		
+		<!-- begin header -->
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<h1>Open Weather app</h1>
+			</div> <!-- end .col-md-8 -->
+			<div class="col-md-2"></div>
+		</div> <!-- end row -->
+		<!-- end header -->
+		
+		<!-- begin div.input -->
+		<div class="row input">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<h2>by zip code</h2>
+				<form>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Zip code" id="zip-value" autocomplete="off"></input>
+					</div> <!-- end .form-group -->
+					<button type="submit" class="btn btn-default" id=zip-submit>Submit</button>
+				</form> <!-- end form -->
+			</div> <!-- end .col-md-8 -->
+			<div class="col-md-2"></div>
+		</div> <!-- end row -->
+		<!-- end div.input -->
+
+		<!-- begin div.input -->
+		<div class="row input">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<h2>by city</h2>
+				<form>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="City" id="city-value" autocomplete="off"></input>
+					</div> <!-- end .form-group -->
+					<button type="submit" class="btn btn-default" id=city-submit>Submit</button>
+				</form> <!-- end form -->
+			</div> <!-- end .col-md-8 -->
+			<div class="col-md-2"></div>
+		</div> <!-- end row -->
+		<!-- end div.input -->
+
+		<!-- begin div.output -->
+		<div class="row output">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<p id="result" style="display:none">The current temperature in <span id="zipOrCity"></span> is <span id="temperature"></span> degrees Fahrenheit.</p>
+			</div> <!-- end .col-md-8 -->
+			<div class="col-md-2"></div>
+		</div> <!-- end row -->
+		<!-- end div.output -->
+
+	</div> <!-- end .container-fluid -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="main.js" type="text/javascript" charset="utf-8" async defer></script>
+
+</body>
+</html>
