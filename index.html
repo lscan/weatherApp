@@ -3,8 +3,10 @@
 <head>
   <title>Open Weather app</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -12,55 +14,79 @@
 		
 		<!-- begin header -->
 		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<h1>Open Weather app</h1>
-			</div> <!-- end .col-md-8 -->
-			<div class="col-md-2"></div>
+			<div class="col-md-offset-3 col-md-6" style="text-align: center;">
+				<h1>Welcome to the Open Weather App</h1>
+			</div> <!-- end .col-md-6 -->
 		</div> <!-- end row -->
 		<!-- end header -->
-		
-		<!-- begin div.input -->
-		<div class="row input">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<h2>by zip code</h2>
-				<form>
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Zip code" id="zip-value" autocomplete="off"></input>
-					</div> <!-- end .form-group -->
-					<button type="submit" class="btn btn-default" id=zip-submit>Submit</button>
-				</form> <!-- end form -->
-			</div> <!-- end .col-md-8 -->
-			<div class="col-md-2"></div>
-		</div> <!-- end row -->
-		<!-- end div.input -->
 
-		<!-- begin div.input -->
-		<div class="row input">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<h2>by city</h2>
-				<form>
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="City" id="city-value" autocomplete="off"></input>
-					</div> <!-- end .form-group -->
-					<button type="submit" class="btn btn-default" id=city-submit>Submit</button>
-				</form> <!-- end form -->
-			</div> <!-- end .col-md-8 -->
-			<div class="col-md-2"></div>
-		</div> <!-- end row -->
-		<!-- end div.input -->
-
-		<!-- begin div.output -->
-		<div class="row output">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<p id="result" style="display:none">The current temperature in <span id="zipOrCity"></span> is <span id="temperature"></span> degrees Fahrenheit.</p>
-			</div> <!-- end .col-md-8 -->
-			<div class="col-md-2"></div>
-		</div> <!-- end row -->
-		<!-- end div.output -->
+		<div class="row">
+			<div class="col-md-3 sidebar">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<h4>Search by:</h4>
+					</div>
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+						  <button class="button arrow city">Zip</button>
+							<button class="button arrow zip">City</button>
+						  <div class="controls">
+					    	<h4>Degrees in</h1>
+						    <p>
+							    <input id='fahrenheit' type="radio" name='r-group-1' checked='checked' />
+							    <label for="fahrenheit">Fahrenheit</label>
+						    </p>
+						    <p>
+							    <input id='celsius' type="radio" name='r-group-1' />
+							    <label for="celsius">Celsius</label>
+						    </p>
+						    <p>
+							    <input id='kelvin' type="radio" name='r-group-1' />
+							    <label for="kelvin">Kelvin</label>
+						    </p>
+					  	</div>
+					  	<div class="controls">
+					  	  <ul class='tg-list'>
+						  	  <li class='tg-list-item'>
+								    <h4>5 day forecast?</h4>
+								    <input class='tgl tgl-flat' id='cb4' type='checkbox'>
+								    <label class='tgl-btn' for='cb4'></label>
+								  </li>
+							  </ul>
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div> <!-- end col-md-3.sidebar -->
+			<div class="col-md-6 main-content">
+				<div class="row">
+					<div class="col-md-12">
+						<h4>search by zip code</h4>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Zip code" id="zip-value" autocomplete="off"></input>
+						</div> <!-- end .form-group -->
+						<button type="submit" class="btn btn-default" id=zip-submit>Submit</button>
+					</form> <!-- end form -->
+					</div>
+					<div class="col-md-12">
+						<h4>by city</h4>
+						<form>
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="City" id="city-value" autocomplete="off"></input>
+							</div> <!-- end .form-group -->
+							<button type="submit" class="btn btn-default" id=city-submit>Submit</button>
+						</form> <!-- end form -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<p id="result" style="display:none">The current temperature in <span id="zipOrCity"></span> is <span id="temperature"></span> degrees Fahrenheit.</p>
+					</div>
+				</div>
+				
+			</div> <!-- end col-md-6.main-content -->
+			<div class="col-md-3 leftover"></div> <!-- end col-md-3.leftover -->
+		</div>
 
 	</div> <!-- end .container-fluid -->
 
