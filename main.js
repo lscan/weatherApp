@@ -11,6 +11,7 @@
 
 // var responseData;
 'use strict';
+var currentLocationButton
 var response;
 (function() {
   var weatherApp = {};
@@ -19,6 +20,16 @@ var response;
   weatherApp.zip = "&zip=";
   weatherApp.city = "&q=";
   var httpRequest;
+  if(navigator.geolocation) {
+    console.log('navigator.geolocation')
+    //if it is use the getCurrentPosition method to retrieve the Window's location
+    navigator.geolocation.getCurrentPosition(function(position) {
+      weatherApp.lat = position.coords.latitude;
+      weatherApp.lon = position.coords.longitude;
+      console.log('finished getting current location');
+      //you could make this button unclickable until current location data is available
+    }, function(error){console.log(error)});
+  } else {console.log('nah');}
 
   document.getElementById("zip-submit").onclick = function(e) {
     e.preventDefault();
@@ -47,4 +58,17 @@ var response;
   function convertKelvin(kelvinTemp) {
   	return Math.round((kelvinTemp*(9/5)-459.67)*10)/10;
   }
+  function currentLocation() {
+    var currentLocationEndpoint = weatherApp.baseUrl + "lat=" + weatherApp.lat + "&lon=" + weatherApp.lon + "&" + weatherApp.apiKey;
+    $.ajax({
+      url: currentLocationEndpoint,
+      method: 'GET',
+      dataType: 'jsonp',
+      success: function(response) {
+        console.log(response);
+      }
+    });
+  }
+  currentLocationButton = document.getElementById('current');
+  currentLocationButton.addEventListener('click', currentLocation);
 })();
