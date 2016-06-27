@@ -14,51 +14,9 @@
 var ctx;
 var ctxData;
 var ctxOptions;
-require(['node_modules/core-js/client/core.js'], function () {
-    // not totally sure how this works. do we need something here?
-    // this clears up the console errors
-});
+// require(['node_modules/core-js/client/core.js'], function () {});
 require(['node_modules/chart.js/dist/Chart.js'], function(){
   ctx = document.getElementById("myChart");
-
-  // begin sample data
-  // var myChart = new Chart(ctx, {
-  //   type: 'bar',
-  //   data: {
-  //     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-  //     datasets: [{
-  //       label: '# of Votes',
-  //       data: [12, 19, 3, 5, 2, 3],
-  //       backgroundColor: [
-  //         'rgba(255, 99, 132, 0.2)',
-  //         'rgba(54, 162, 235, 0.2)',
-  //         'rgba(255, 206, 86, 0.2)',
-  //         'rgba(75, 192, 192, 0.2)',
-  //         'rgba(153, 102, 255, 0.2)',
-  //         'rgba(255, 159, 64, 0.2)'
-  //       ],
-  //       borderColor: [
-  //         'rgba(255,99,132,1)',
-  //         'rgba(54, 162, 235, 1)',
-  //         'rgba(255, 206, 86, 1)',
-  //         'rgba(75, 192, 192, 1)',
-  //         'rgba(153, 102, 255, 1)',
-  //         'rgba(255, 159, 64, 1)'
-  //       ],
-  //       borderWidth: 1
-  //     }]
-  //   },
-  //   options: {
-  //     scales: {
-  //       yAxes: [{
-  //         ticks: {
-  //           beginAtZero:true
-  //         }
-  //       }]
-  //     }
-  //   }
-  // });
-  // end sample data
 
   //trying line chart
 
@@ -72,31 +30,12 @@ require(['node_modules/chart.js/dist/Chart.js'], function(){
         backgroundColor: "#FE5F55",
         borderColor: "#FE5F55",
         borderCapStyle: 'butt',
-        // borderDash: [],
-        // borderDashOffset: 0,
-        // borderJoinStyle: 'miter',
-        // pointBorderColor: "grey",
-        // pointBackgroundColor: "#fff",
-        // pointBorderWidth: 1,
-        // pointHoverRadius: 1,
-        // pointHoverBackgroundColor: "grey",
-        // pointHoverBorderColor: "red",
-        // pointHoverBorderWidth: 1,
-        // pointRadius: 1,
-        // pointHitRadius: 5,
         data: []
       }
     ]
   };
   ctxOptions = {
     showLines: true
-    // scales: {
-    //   yAxes: [{
-    //     ticks: {
-    //       beginAtZero:true
-    //     }
-    //   }]
-    // }
   }
 
 
@@ -131,17 +70,6 @@ var weatherApp = {};
   weatherApp.city = "&q=";
   weatherApp.fiveDay = false;
   var httpRequest;
-  if(navigator.geolocation) {
-    console.log('navigator.geolocation')
-    //if it is use the getCurrentPosition method to retrieve the Window's location
-    navigator.geolocation.getCurrentPosition(function(position) {
-      weatherApp.lat = position.coords.latitude;
-      weatherApp.lon = position.coords.longitude;
-      console.log('finished getting current location');
-      //you could make this button unclickable until current location data is available
-      //you could also mess with local storage to speed things up
-    }, function(error){console.log(error)});
-  } else {console.log('nah');}
 
   document.getElementById("zip-submit").onclick = function(e) {
     e.preventDefault();
@@ -169,6 +97,29 @@ var weatherApp = {};
     if(weatherApp.fiveDay == true) {
       fiveDayCity();
     }
+  }
+  document.getElementById("location-submit").onclick = function(e) {
+    e.preventDefault();
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        weatherApp.lat = position.coords.latitude;
+        weatherApp.lon = position.coords.longitude;
+        $.ajax({
+          url: "http://api.openweathermap.org/data/2.5/weather?lat=" + weatherApp.lat.toFixed(2) + "&lon=" + weatherApp.lon.toFixed(2) + "&" + weatherApp.apiKey,
+          method: 'GET',
+          dataType: 'jsonp',
+          success: function(response) {
+            var data = response;
+            document.getElementById('zipOrCity').innerHTML = "lat " + weatherApp.lat.toFixed(2) + ", lon " + weatherApp.lon.toFixed(2);
+            document.getElementById('temperature').innerHTML = convertKelvin(data.main.temp);
+            document.getElementById('result').style.display = "block";
+            if(weatherApp.fiveDay == true) {
+              fiveDayCity();
+            }
+          }
+        });
+      }, function(error){console.log(error)});
+    } else {console.log('nah');}
   }
   function convertKelvin(kelvinTemp) {
   	return Math.round((kelvinTemp*(9/5)-459.67)*10)/10;
