@@ -1,6 +1,3 @@
-// todo:
-// remove the old chart when you search for a new one
-
 // chart stuff
 var ctx;
 var ctxData;
@@ -154,7 +151,8 @@ var weatherApp = {};
       method: 'GET',
       dataType: 'jsonp',
       success: function(response) {
-        console.log(response);
+        ctxData.labels = [];
+        ctxData.datasets[0].data = [];
         for(var i=0; i<response.list.length; i++) {
           //grab data
           var fiveDayDatetime = response.list[i].dt_txt;
