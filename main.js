@@ -1,3 +1,7 @@
+// to do:
+// need to remove the geolocation functionality per https://goo.gl/rStTGz
+// zip code submit on enter
+
 // chart stuff
 var ctx;
 var ctxData;
@@ -36,10 +40,10 @@ var weatherApp = {};
     hideSections();
     document.getElementsByClassName('zip-search')[0].style.display = "block";
   });
-  document.getElementById('location-click').addEventListener('click', function() {
-    hideSections();
-    document.getElementsByClassName('location-search')[0].style.display = "block";
-  });
+  // document.getElementById('location-click').addEventListener('click', function() {
+  //   hideSections();
+  //   document.getElementsByClassName('location-search')[0].style.display = "block";
+  // });
   function hideSections() {
     document.getElementsByClassName('city-search')[0].style.display = "none";
     document.getElementsByClassName('zip-search')[0].style.display = "none";
@@ -233,8 +237,19 @@ var weatherApp = {};
   for(var i=0; i<tempScaleRadios.length; i++) {
     tempScaleRadios[i].addEventListener('click', setTempScale);
   }
-  // listener for the current location button
-  currentLocationButton = document.getElementById('current');
-  currentLocationButton.addEventListener('click', currentLocation);
+
+  // allow for submit on enter of zip and city inputs
+  var zipInput = document.getElementById('zip-value');
+  var cityInput = document.getElementById('city-value');
+  zipInput.addEventListener('keydown', function() {
+    if(event.keyCode == 13) {
+      document.getElementById('zip-submit').click();
+    }
+  });
+  cityInput.addEventListener('keydown', function() {
+    if(event.keyCode == 13) {
+      document.getElementById('zip-submit').click();
+    }
+  });
 
 })();
